@@ -1,11 +1,12 @@
 # Oppstartsplan — activity-data
 
 Arbeidsdokument. Kryss av underveis, endre det som ikke stemmer.
-Sist oppdatert: 2026-08-25 (v6)
+Sist oppdatert: 2026-08-25 (v7)
 
-**Om dette dokumentet:** oppdateres ved at Claude lager en ny versjon som du
-laster ned og erstatter den gamle med. Claude kan ikke skrive til din disk
-eller Google Drive. Legg dokumentet i repoet når det finnes.
+**Om dette dokumentet:** ligger nå i repoet på
+`https://raw.githubusercontent.com/mariusje/activity-data/main/OPPSTART.md`.
+Claude kan lese det derfra, men ikke skrive til det — oppdateringer skjer ved
+at Claude lager en ny versjon som du laster ned og committer.
 
 **Rekkefølgen er en avhengighetskjede.** Del 2 må være ferdig og verifisert før
 Del 3, fordi prosjektinstruksjonene peker på filer som må eksistere. Ikke hopp.
@@ -22,8 +23,10 @@ Del 3, fordi prosjektinstruksjonene peker på filer som må eksistere. Ikke hopp
 
 - **Navn: `activity-data`.** ✔
   Bevisst kjedelig arbeidsnavn. Låser verken datakilde, aktivitetstype eller
-  form. Bindestrek framfor understrek er GitHub-konvensjon.
-  Produktnavn utsettes til det finnes et produkt.
+  form. Produktnavn utsettes til det finnes et produkt.
+
+- **GitHub-bruker: `mariusje`.** ✔
+  Repo: `https://github.com/mariusje/activity-data`
 
 - **Offentlig repo.** ✔
   Gjør at Claude kan lese filene direkte via rå-URL uten synkronisering.
@@ -80,30 +83,41 @@ Del 3, fordi prosjektinstruksjonene peker på filer som må eksistere. Ikke hopp
 | GitHub-integrasjon i prosjektkunnskap | Nei (snapshot) | Ja | «Sync now» etter hver push |
 | Manuell opplasting | Nei (kopi) | Ja | Last opp på nytt hver gang |
 
+### Viktig teknisk detalj
+
+Claude kan **kun hente URL-er som faktisk står i samtalekonteksten.** En adresse
+Claude «gjetter seg til» ved å bytte ut filnavnet i en kjent URL, blir avvist.
+
+Derfor må prosjektinstruksjonene inneholde de **ferdig utfylte** URL-ene, ikke
+plassholdere. Da ligger de i konteksten i hver eneste tråd, og henting virker.
+
+Legger du til en ny md-fil senere: legg URL-en inn i instruksjonene, ellers når
+ikke Claude den.
+
 ---
 
 ## Del 2 — Sett opp repoet FØRST
 
 Må være ferdig, pushet og verifisert før Del 3.
 
-### 2.1 Opprett på GitHub
+### 2.1 Opprett på GitHub ✔
 
-- [ ] Nytt repository: `activity-data`
-- [ ] Synlighet: **Public**
-- [ ] Initier med README
-- [ ] Legg til `.gitignore` for Python
-- [ ] GitHub-brukernavn (trengs i 3.2): _______________
+- [x] Repository `activity-data` opprettet
+- [x] Synlighet: Public
+- [x] GitHub-bruker: `mariusje`
+- [ ] README
+- [ ] `.gitignore` for Python
 
-### 2.2 Klon lokalt
+### 2.2 Klon lokalt ✔
 
 ```
-git clone https://github.com/<bruker>/activity-data.git
+git clone https://github.com/mariusje/activity-data.git
 cd activity-data
 ```
 
 ### 2.3 Opprett filene
 
-Alle på `main`. Innholdet under er det du limer inn nå.
+Alle på `main`. Innholdet under er det du limer inn.
 
 **Eierskap:**
 
@@ -141,7 +155,7 @@ Working title. Scope to be defined in thread 1.
 
 ---
 
-**`DECISIONS.md`** — beslutningslogg. Opprett med mal og forklaring:
+**`DECISIONS.md`** — beslutningslogg:
 
 ```markdown
 # Decisions
@@ -159,8 +173,7 @@ One entry per decision. Newest at the bottom.
 
 ---
 
-**`QUESTIONS.md`** — parkeringsplass for alt utenfor trådens scope.
-Opprett med de kjente punktene allerede inne:
+**`QUESTIONS.md`** — parkeringsplass. Opprett med de kjente punktene inne:
 
 ```markdown
 # Open questions
@@ -188,7 +201,7 @@ Parked items. Do not pursue mid-thread — write here and move on.
 
 ---
 
-**`LOGGBOK.md`** — norsk. Opprett med mal:
+**`LOGGBOK.md`** — norsk:
 
 ```markdown
 # Loggbok
@@ -209,10 +222,14 @@ Punkt 4 er der læringen sitter. Den mister all verdi hvis en AI formulerer den.
 
 ---
 
-**`OPPSTART.md`** — dette dokumentet.
+**`OPPSTART.md`** ✔ — dette dokumentet, allerede i repoet.
 
-**`AGENTS.md`** — **opprettes ikke nå.** Skrives etter tråd 5, når du vet hva
-som skal bygges. Innhold i Del 5.
+**`AGENTS.md`** — **opprettes ikke nå.** Skrives etter tråd 5. Innhold i Del 5.
+
+- [ ] `PROJECT.md`
+- [ ] `DECISIONS.md`
+- [ ] `QUESTIONS.md`
+- [ ] `LOGGBOK.md`
 
 ### 2.4 Branching-strategi
 
@@ -233,8 +250,8 @@ poenget med kodekontroll-målet i Del 5.
 
 Navngiving: `phase-1-strava-import`, `phase-2-aggregation`.
 
-Dette er solo-arbeid, så PR-en er ikke for andres review. Den er et lesepunkt
-for deg selv før koden treffer `main`.
+Solo-arbeid, så PR-en er ikke for andres review. Den er et lesepunkt for deg selv
+før koden treffer `main`.
 
 ### 2.5 Commit, push og verifiser
 
@@ -244,17 +261,15 @@ git commit -m "Initial project structure"
 git push
 ```
 
-- [ ] Åpne `https://raw.githubusercontent.com/<bruker>/activity-data/main/PROJECT.md`
-      i nettleseren
-- [ ] Ser du innholdet? Da virker rå-URL-metoden → gå til Del 3
-- [ ] Får du 404? Fiks det før du går videre — ellers feilsøker du
-      prosjektinstruksjoner som egentlig er riktige
+- [x] **Rå-URL-metoden er verifisert** — Claude leste `OPPSTART.md` direkte fra
+      `https://raw.githubusercontent.com/mariusje/activity-data/main/OPPSTART.md`
+- [ ] Verifiser tilsvarende for `PROJECT.md` når den er pushet
 
 ---
 
 ## Del 3 — Sett opp Claude-prosjektet
 
-**Forutsetning: Del 2 ferdig, pushet og verifisert i 2.5.**
+**Forutsetning: filene fra 2.3 er opprettet og pushet.**
 
 ### 3.1 Opprett prosjektet
 
@@ -263,7 +278,7 @@ git push
 
 ### 3.2 Sett prosjektinstruksjoner
 
-Klikk «Set project instructions». Bytt `<bruker>` med GitHub-brukernavnet ditt:
+Klikk «Set project instructions». Denne kan limes inn som den er:
 
 ```
 Dette prosjektet handler om utvikling av et treningsdata-verktøy (activity-data).
@@ -271,10 +286,11 @@ Overordnet mål er læring, med et sekundært ønske om at det kan bli
 noe kommersialiserbart på sikt.
 
 Prosjektfilene ligger i et offentlig GitHub-repo, på branch main. Hent ved behov:
-- PROJECT.md:    https://raw.githubusercontent.com/<bruker>/activity-data/main/PROJECT.md
-- DECISIONS.md:  https://raw.githubusercontent.com/<bruker>/activity-data/main/DECISIONS.md
-- QUESTIONS.md:  https://raw.githubusercontent.com/<bruker>/activity-data/main/QUESTIONS.md
-- AGENTS.md:     https://raw.githubusercontent.com/<bruker>/activity-data/main/AGENTS.md
+- PROJECT.md:    https://raw.githubusercontent.com/mariusje/activity-data/main/PROJECT.md
+- DECISIONS.md:  https://raw.githubusercontent.com/mariusje/activity-data/main/DECISIONS.md
+- QUESTIONS.md:  https://raw.githubusercontent.com/mariusje/activity-data/main/QUESTIONS.md
+- OPPSTART.md:   https://raw.githubusercontent.com/mariusje/activity-data/main/OPPSTART.md
+- AGENTS.md:     https://raw.githubusercontent.com/mariusje/activity-data/main/AGENTS.md
   (AGENTS.md finnes ikke ennå — opprettes senere)
 
 Hent PROJECT.md og DECISIONS.md ved starten av enhver tråd som gjelder
@@ -302,15 +318,19 @@ Ved slutten av en tråd, når jeg ber om det: skriv et ferdig utkast til
 oppføring i DECISIONS.md på engelsk, som jeg kan lime rett inn.
 ```
 
-- [ ] Tilpasset og lagret
+- [ ] Limt inn og lagret
+
+**Merk:** URL-ene må stå ferdig utfylt her. Claude kan ikke konstruere en adresse
+selv — den må finnes i konteksten. Legger du til nye md-filer senere, må URL-en
+inn i denne lista.
 
 ### 3.3 Test
 
 - [ ] Start tråd 1 (Del 4) og be Claude hente `PROJECT.md` som første handling
 - [ ] Bekreft at innholdet stemmer med det du la inn i 2.3
 - [ ] Virker det ikke: bytt til GitHub-integrasjon — klikk «+» i
-      prosjektkunnskap-panelet til høyre → legg til fra GitHub → velg de fire
-      md-filene. Husk da «Sync now» etter hver push.
+      prosjektkunnskap-panelet til høyre → legg til fra GitHub → velg md-filene.
+      Husk da «Sync now» etter hver push.
 
 ---
 
@@ -456,8 +476,8 @@ Fase 2 i sykkelkart illustrerte dette: du forventet å måtte korrigere
 H3-aggregeringen, det ble ikke nødvendig, og dermed ble det ingen skill.
 Riktig konklusjon. En skill uten forutgående friksjon er gjetning.
 
-**Ikke lag skills på forhånd.** Vent på friksjonen. Kandidatene ligger allerede
-notert i `QUESTIONS.md` fra 2.3.
+**Ikke lag skills på forhånd.** Vent på friksjonen. Kandidatene ligger notert i
+`QUESTIONS.md` fra 2.3.
 
 ### To ulike steder skills kan bo
 
@@ -542,24 +562,24 @@ neste tråd den.
 
 ## Åpne spørsmål
 
-- [ ] Virker rå-URL-metoden? Verifiseres i 2.5, testes i 3.3.
+- [x] ~~Virker rå-URL-metoden?~~ Ja, verifisert med `OPPSTART.md`.
 - [ ] Er `sykkelkart` avsluttet, eller lever det parallelt som referanse?
-- [ ] Skal `AGENTS.md` også leses av chatten, ikke bare Claude Code?
+- [ ] Skal `AGENTS.md` leses av chatten, ikke bare Claude Code?
       URL-en ligger allerede i instruksjonene — ta stilling når fila finnes.
 
 ---
 
-## Sjekkliste
+## Sjekkliste — status
 
-**Del 2 — repo (først)**
-1. [ ] Opprett offentlig repo `activity-data` med README og Python-`.gitignore`
-2. [ ] Klon lokalt
-3. [ ] Opprett `PROJECT.md`, `DECISIONS.md`, `QUESTIONS.md`, `LOGGBOK.md`,
-       `OPPSTART.md` med innholdet fra 2.3
-4. [ ] Commit og push til `main`
-5. [ ] Verifiser rå-URL i nettleseren (2.5)
+**Del 2 — repo**
+1. [x] Offentlig repo `activity-data` opprettet
+2. [x] Klonet lokalt
+3. [x] `OPPSTART.md` pushet og verifisert lesbar
+4. [ ] README og `.gitignore` for Python
+5. [ ] `PROJECT.md`, `DECISIONS.md`, `QUESTIONS.md`, `LOGGBOK.md` med innhold fra 2.3
+6. [ ] Commit og push til `main`
 
-**Del 3 — Claude-prosjekt (etter verifisering)**
-6. [ ] Opprett prosjekt `activity-data`
-7. [ ] Lim inn prosjektinstruksjoner med riktig brukernavn
-8. [ ] Start tråd 1 og test filhenting som første handling
+**Del 3 — Claude-prosjekt**
+7. [ ] Opprett prosjekt `activity-data`
+8. [ ] Lim inn prosjektinstruksjoner (3.2 — ferdig utfylt, klar til bruk)
+9. [ ] Start tråd 1 og test filhenting som første handling
