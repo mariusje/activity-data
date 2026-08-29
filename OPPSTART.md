@@ -1,15 +1,19 @@
 # Oppstartsplan — activity-data
 
 Arbeidsdokument. Kryss av underveis, endre det som ikke stemmer.
-Sist oppdatert: 2026-08-25 (v7)
+Sist oppdatert: 2026-08-25 (v8)
 
-**Om dette dokumentet:** ligger nå i repoet på
+**Om dette dokumentet:** ligger i repoet på
 `https://raw.githubusercontent.com/mariusje/activity-data/main/OPPSTART.md`.
-Claude kan lese det derfra, men ikke skrive til det — oppdateringer skjer ved
-at Claude lager en ny versjon som du laster ned og committer.
+Claude kan lese det derfra, men ikke skrive til det — oppdateringer skjer ved at
+Claude lager en ny versjon eller beskriver endringen, og du eller Claude Code
+committer den.
+
+**Struktureringsprinsipp:** beslutninger står der handlingen skjer, begrunnelser
+ligger samlet bakerst. Du skal aldri måtte bla framover for å vite hva du gjør nå.
 
 **Rekkefølgen er en avhengighetskjede.** Del 2 må være ferdig og verifisert før
-Del 3, fordi prosjektinstruksjonene peker på filer som må eksistere. Ikke hopp.
+Del 3. Ikke hopp.
 
 ---
 
@@ -18,12 +22,12 @@ Del 3, fordi prosjektinstruksjonene peker på filer som må eksistere. Ikke hopp
 ### Avgjort
 
 - **Nytt repo, ikke videreutvikling.** ✔
-  Eksisterende sykkelkart-løsning ble AI-generert i store bolker, koden er
-  ikke under kontroll, og den tekniske løsningen er svak.
+  Eksisterende sykkelkart-løsning ble AI-generert i store bolker, koden er ikke
+  under kontroll, og den tekniske løsningen er svak.
 
 - **Navn: `activity-data`.** ✔
-  Bevisst kjedelig arbeidsnavn. Låser verken datakilde, aktivitetstype eller
-  form. Produktnavn utsettes til det finnes et produkt.
+  Bevisst kjedelig arbeidsnavn. Låser verken datakilde, aktivitetstype eller form.
+  Produktnavn utsettes til det finnes et produkt.
 
 - **GitHub-bruker: `mariusje`.** ✔
   Repo: `https://github.com/mariusje/activity-data`
@@ -47,8 +51,8 @@ Del 3, fordi prosjektinstruksjonene peker på filer som må eksistere. Ikke hopp
   kode gir blandingsprodukter. Loggboka er refleksjon, ikke dokumentasjon, og
   blir mer presis på morsmålet.
 
-  **Konsekvens for prompting:** du prompter på norsk, men må be eksplisitt om at
-  *leveransen* til repo-filene skrives på engelsk. Det står i trådpromptene i Del 4.
+  **Konsekvens:** du prompter på norsk, men må be eksplisitt om at *leveransen*
+  til repo-filene skrives på engelsk. Det ligger i trådpromptene.
 
   Bonus: engelske filnavn unngår `Ø` og `Å`, som må prosentkodes i rå-URL-er.
 
@@ -86,10 +90,10 @@ Del 3, fordi prosjektinstruksjonene peker på filer som må eksistere. Ikke hopp
 ### Viktig teknisk detalj
 
 Claude kan **kun hente URL-er som faktisk står i samtalekonteksten.** En adresse
-Claude «gjetter seg til» ved å bytte ut filnavnet i en kjent URL, blir avvist.
+Claude gjetter seg til ved å bytte filnavn i en kjent URL, blir avvist.
 
-Derfor må prosjektinstruksjonene inneholde de **ferdig utfylte** URL-ene, ikke
-plassholdere. Da ligger de i konteksten i hver eneste tråd, og henting virker.
+Derfor må prosjektinstruksjonene inneholde de **ferdig utfylte** URL-ene. Da
+ligger de i konteksten i hver tråd, og henting virker.
 
 Legger du til en ny md-fil senere: legg URL-en inn i instruksjonene, ellers når
 ikke Claude den.
@@ -224,7 +228,8 @@ Punkt 4 er der læringen sitter. Den mister all verdi hvis en AI formulerer den.
 
 **`OPPSTART.md`** ✔ — dette dokumentet, allerede i repoet.
 
-**`AGENTS.md`** — **opprettes ikke nå.** Skrives etter tråd 5. Innhold i Del 5.
+**`AGENTS.md`** — **opprettes ikke nå.** Den skal skrives etter tråd 5, når du
+vet hva som faktisk skal bygges. Innhold i Del 6.
 
 - [ ] `PROJECT.md`
 - [ ] `DECISIONS.md`
@@ -244,9 +249,10 @@ Punkt 4 er der læringen sitter. Den mister all verdi hvis en AI formulerer den.
 `.../activity-data/main/PROJECT.md`. Ligger en oppdatert beslutning i en
 feature-branch, ser ikke Claude den.
 
-**Hvorfor feature-branches for kode:** gir et sted å rulle tilbake fra når en
-fase går galt, og PR-en tvinger frem at du leser din egen diff — som er selve
-poenget med kodekontroll-målet i Del 5.
+**Hvorfor feature-branches for kode:** gir et sted å rulle tilbake fra når en fase
+går galt, og PR-en tvinger frem at du leser din egen diff. Å faktisk lese diffen
+er hele poenget denne gangen — forrige prosjekt havnet ute av kontroll fordi
+store bolker gikk inn uten at du kjente dem.
 
 Navngiving: `phase-1-strava-import`, `phase-2-aggregation`.
 
@@ -278,7 +284,7 @@ git push
 
 ### 3.2 Sett prosjektinstruksjoner
 
-Klikk «Set project instructions». Denne kan limes inn som den er:
+Klikk «Set project instructions». Denne limes inn som den er:
 
 ```
 Dette prosjektet handler om utvikling av et treningsdata-verktøy (activity-data).
@@ -320,13 +326,13 @@ oppføring i DECISIONS.md på engelsk, som jeg kan lime rett inn.
 
 - [ ] Limt inn og lagret
 
-**Merk:** URL-ene må stå ferdig utfylt her. Claude kan ikke konstruere en adresse
-selv — den må finnes i konteksten. Legger du til nye md-filer senere, må URL-en
-inn i denne lista.
+**Merk:** URL-ene må stå ferdig utfylt. Claude kan ikke konstruere en adresse selv
+— den må finnes i konteksten. Legger du til nye md-filer senere, må URL-en inn
+i denne lista.
 
 ### 3.3 Test
 
-- [ ] Start tråd 1 (Del 4) og be Claude hente `PROJECT.md` som første handling
+- [ ] Start tråd 1 og be Claude hente `PROJECT.md` som første handling
 - [ ] Bekreft at innholdet stemmer med det du la inn i 2.3
 - [ ] Virker det ikke: bytt til GitHub-integrasjon — klikk «+» i
       prosjektkunnskap-panelet til høyre → legg til fra GitHub → velg md-filene.
@@ -334,11 +340,20 @@ inn i denne lista.
 
 ---
 
-## Del 4 — Trådrekkefølge
+## Del 4 — Trådene
 
 Én tråd per tema. Ikke én evigvarende megatråd.
 
-### Tråd 1 — Avgrensning
+**Modellvalg står i hver trådoverskrift.** Begrunnelsen ligger i Del 8.
+Haiku brukes ikke i noen av disse — ingen er mekanisk arbeid.
+Du kan bytte modell midt i en tråd; konteksten følger med.
+
+**Avslutningsrutinen for hver tråd står i Del 5.** Les den før du starter tråd 1,
+så vet du hva tråden skal ende i.
+
+---
+
+### Tråd 1 — Avgrensning — **Opus**
 
 **Forutsetning:** Del 2 og 3 ferdig.
 **Sluttprodukt:** `PROJECT.md` fylt ut, på engelsk.
@@ -372,7 +387,9 @@ det ferdige innholdet på engelsk.
 - Ikke godta et tynt svar på det. Det er greit at svaret er «ingenting, dette er
   et læringsprosjekt» — men da *vet* du det, og valgene videre blir andre.
 
-### Tråd 2 — Idémyldring
+---
+
+### Tråd 2 — Idémyldring — Sonnet
 
 **Forutsetning:** `PROJECT.md` fylt ut og pushet til `main`.
 **Sluttprodukt:** `PROJECT.md` oppdateres, resten til `QUESTIONS.md`.
@@ -404,25 +421,30 @@ Vi snakker norsk, men alt som skal inn i repo-filene skriver du på engelsk.
 - Be eksplisitt om svakheter. Ellers får du bare oppside.
 - Flaskehalsen er aldri mangel på ideer — den er å bestemme hva du *ikke* bygger.
 
-### Tråd 3 — Plattform
+---
+
+### Tråd 3 — Plattform — Sonnet
 
 **Forutsetning:** tråd 2 avsluttet, `DECISIONS.md` oppdatert på `main`.
 
 - [ ] Mobil vs. web vs. lokalt verktøy
-- [ ] Bør falle stort sett ut av tråd 1 og 2 — hvis ikke, mangler noe der
+- [ ] Bør stort sett falle ut av tråd 1 og 2 — hvis ikke, mangler noe der
 - [ ] Ta med: hvilken plattform lærer du mest av? Hva er lettest å distribuere senere?
 - [ ] → `DECISIONS.md`
 
-### Tråd 4 — Teknologi + arkitektur
+---
+
+### Tråd 4 — Teknologi + arkitektur — **Opus**
 
 **Forutsetning:** plattformvalg tatt.
 
 - [ ] Én tråd, ikke to. På denne størrelsen henger de sammen.
 - [ ] Datamodell, lagring, avhengigheter
-- [ ] Vurder Opus her — feilkostnaden er høyere enn ellers
 - [ ] → `DECISIONS.md`
 
-### Tråd 5 — Fasedeling
+---
+
+### Tråd 5 — Fasedeling — Sonnet
 
 **Forutsetning:** teknologivalg tatt.
 
@@ -431,105 +453,21 @@ Vi snakker norsk, men alt som skal inn i repo-filene skriver du på engelsk.
 - [ ] Hver fase = én feature-branch
 - [ ] → faseplan i repoet
 
-**Etter tråd 5, før første kodeøkt:** skriv `AGENTS.md` (Del 5).
+**Etter tråd 5, før første kodeøkt:** skriv `AGENTS.md` (Del 6).
 
 ---
 
-## Del 5 — Kodedisiplin (`AGENTS.md`)
+## Del 5 — Rutiner for hver tråd
 
-**Opprettes etter tråd 5.** Engelsk.
-
-Målet denne gangen: **kjenne koden**, ikke bare ha den.
-Store AI-genererte bolker skjer ikke fordi Claude Code er ivrig — det skjer
-fordi ingenting i oppsettet stopper den.
-
-Regler som skal inn:
-
-- [ ] **Språk:** `All code, comments, identifiers, commit messages and
-      docstrings in English.`
-      Med denne på plass kan du prompte på norsk uten at det lekker inn i koden.
-- [ ] **Plan før kode, hver gang**
-      «Lag en plan. Ikke implementer ennå.»
-      Les planen, marker feil, send tilbake: «adresser notatene, ikke implementer ennå».
-      Gjenta til planen er riktig. *Da* implementerer du.
-- [ ] **Én enhet om gangen**
-      Ikke «bygg importmodulen» — men «skriv funksjonen som parser én aktivitet,
-      med tester, og stopp der».
-      Er diffen for stor til at du orker å lese den nøye, var oppgaven for stor.
-- [ ] **Forklar-tilbake-testen**
-      Etter hver bit: lukk skjermen, forklar for deg selv hva koden gjør.
-      Klarer du det ikke → be Claude Code gå gjennom den linje for linje.
-- [ ] **Commit per bit**, feature-branch per fase
-- [ ] **Testing er en betingelse, ikke en fase**
-      Tester følger med hver oppgave. Legges de til slutt, får du et
-      etterslep du aldri tar igjen.
-
----
-
-## Del 6 — Skills
-
-**Skills er atferdskorreksjoner, ikke kunnskapslagring.** De lages når du har
-måttet korrigere den samme tingen gjentatte ganger — tommelfingerregelen er
-tre repetisjoner.
-
-Fase 2 i sykkelkart illustrerte dette: du forventet å måtte korrigere
-H3-aggregeringen, det ble ikke nødvendig, og dermed ble det ingen skill.
-Riktig konklusjon. En skill uten forutgående friksjon er gjetning.
-
-**Ikke lag skills på forhånd.** Vent på friksjonen. Kandidatene ligger notert i
-`QUESTIONS.md` fra 2.3.
-
-### To ulike steder skills kan bo
-
-| Sted | Hva | Når |
-|---|---|---|
-| **Claude Code** (`.claude/skills/` i repoet) | Kodeatferd | Når du korrigerer samme kodeting 3× |
-| **Denne chatten** (globale skills) | Arbeidsflyt og metodikk | Når en prosedyre gjentas på tvers av prosjekter |
-
-### Eksisterende skills som er relevante
-
-- `sdd-navigator` — når du er usikker på hvilken SDD-skill som passer
-- `sdd-domain-skill-extractor` — når du skal skrive de første domeneskillene
-- `sdd-skill-health-check` — kvartalsvis, eller når skills føles utdaterte
-- `context-engineering-audit` — vurder etter at `AGENTS.md` finnes
-
-### Grensen mot `AGENTS.md`
-
-`AGENTS.md` er stående regler som alltid gjelder. Skills utløses situasjonelt.
-Kort og alltid relevant → `AGENTS.md`.
-Krever mer forklaring og gjelder bare noen ganger → skill.
-
-Ikke start med skills. `AGENTS.md` dekker mer enn du tror i starten.
-
----
-
-## Del 7 — Modellvalg
-
-| Modell | Bruk til |
-|---|---|
-| **Sonnet** | Standard i Claude Code. Det meste. |
-| **Opus** | Når det å ta feil er dyrt: arkitektur, datamodell, valg du må leve med |
-| **Haiku** | Kun ekte mekanisk arbeid |
-
-Lærdom fra sykkelkart fase 4: «liten oppgave» og «mekanisk oppgave» er ikke
-det samme. Norge/Italia-problemet så ut som en fargejustering, men var et
-designvalg. Haiku klarte det ikke.
-
-På Pro betaler du ikke per token. Ikke velg ned modell for å spare penger
-du ikke bruker.
-
----
-
-## Del 8 — Rutiner
-
-### Ved start av hver tråd
+### Ved start
 - [ ] «Hent PROJECT.md og DECISIONS.md fra repoet først.»
 - [ ] Sett scope eksplisitt: «Denne tråden handler kun om [X]. Ikke foreslå [Y].»
+- [ ] Velg modell fra trådoverskriften i Del 4
 
 ### Underveis
 - [ ] Off-topic → skriv i `QUESTIONS.md`, ikke forfølg det i tråden
 
-### Ved slutt av hver tråd
+### Ved slutt
 
 **1. Be om utkast:**
 > «Skriv et ferdig utkast til oppføring i DECISIONS.md for denne tråden, på
@@ -560,6 +498,113 @@ neste tråd den.
 
 ---
 
+## Del 6 — Kodedisiplin (`AGENTS.md`)
+
+**Opprettes etter tråd 5, før første kodeøkt.** Engelsk.
+
+Målet denne gangen: **kjenne koden**, ikke bare ha den.
+Store AI-genererte bolker skjer ikke fordi Claude Code er ivrig — det skjer fordi
+ingenting i oppsettet stopper den.
+
+Regler som skal inn:
+
+- [ ] **Språk:** `All code, comments, identifiers, commit messages and
+      docstrings in English.`
+      Med denne på plass kan du prompte på norsk uten at det lekker inn i koden.
+- [ ] **Plan før kode, hver gang**
+      «Lag en plan. Ikke implementer ennå.»
+      Les planen, marker feil, send tilbake: «adresser notatene, ikke implementer ennå».
+      Gjenta til planen er riktig. *Da* implementerer du.
+- [ ] **Én enhet om gangen**
+      Ikke «bygg importmodulen» — men «skriv funksjonen som parser én aktivitet,
+      med tester, og stopp der».
+      Er diffen for stor til at du orker å lese den nøye, var oppgaven for stor.
+- [ ] **Forklar-tilbake-testen**
+      Etter hver bit: lukk skjermen, forklar for deg selv hva koden gjør.
+      Klarer du det ikke → be Claude Code gå gjennom den linje for linje.
+- [ ] **Commit per bit**, feature-branch per fase
+- [ ] **Testing er en betingelse, ikke en fase**
+      Tester følger med hver oppgave. Legges de til slutt, får du et etterslep
+      du aldri tar igjen.
+
+---
+
+## Del 7 — Skills
+
+**Skills er atferdskorreksjoner, ikke kunnskapslagring.** De lages når du har
+måttet korrigere den samme tingen gjentatte ganger — tommelfingerregelen er tre
+repetisjoner.
+
+Fase 2 i sykkelkart illustrerte dette: du forventet å måtte korrigere
+H3-aggregeringen, det ble ikke nødvendig, og dermed ble det ingen skill. Riktig
+konklusjon. En skill uten forutgående friksjon er gjetning.
+
+**Ikke lag skills på forhånd.** Vent på friksjonen. Kandidatene ligger notert i
+`QUESTIONS.md` fra 2.3.
+
+### To ulike steder skills kan bo
+
+| Sted | Hva | Når |
+|---|---|---|
+| **Claude Code** (`.claude/skills/` i repoet) | Kodeatferd | Når du korrigerer samme kodeting 3× |
+| **Denne chatten** (globale skills) | Arbeidsflyt og metodikk | Når en prosedyre gjentas på tvers av prosjekter |
+
+### Eksisterende skills som er relevante
+
+- `sdd-navigator` — når du er usikker på hvilken SDD-skill som passer
+- `sdd-domain-skill-extractor` — når du skal skrive de første domeneskillene
+- `sdd-skill-health-check` — kvartalsvis, eller når skills føles utdaterte
+- `context-engineering-audit` — vurder etter at `AGENTS.md` finnes
+
+### Grensen mot `AGENTS.md`
+
+`AGENTS.md` er stående regler som alltid gjelder. Skills utløses situasjonelt.
+Kort og alltid relevant → `AGENTS.md`.
+Krever mer forklaring og gjelder bare noen ganger → skill.
+
+Ikke start med skills. `AGENTS.md` dekker mer enn du tror i starten.
+
+---
+
+## Del 8 — Modellvalg: begrunnelse
+
+Selve valget står i trådoverskriftene i Del 4. Her er hvorfor.
+
+### Chat-trådene
+
+**Tråd 1 — Opus.** Kanskje kontraintuitivt, siden det «bare er snakk». Men alt
+annet henger på denne tråden. En tråd 1 som lander på en tynn premiss gir deg
+fire påfølgende tråder som er godt gjennomført på feil grunnlag. Du trenger også
+reell motstand her — at modellen faktisk sier «det løser Strava allerede» framfor
+å bygge videre på det du foreslår.
+
+**Tråd 4 — Opus.** Den klassiske: valg du må leve med, der feil koster ombygging.
+
+**Tråd 2, 3 og 5 — Sonnet.** Idégenerering, plattformvalg og fasedeling er arbeid
+der du har sterke meninger selv og trenger en kompetent motpart, ikke maksimal
+tenkekraft. Tråd 3 bør dessuten stort sett være avgjort av tråd 1 og 2 — krever
+den tung tenkning, mangler noe lenger opp.
+
+**Merker du at svarene blir for medgjørlige i en Sonnet-tråd:** bytt til Opus og
+fortsett i samme tråd.
+
+### Claude Code
+
+| Modell | Bruk til |
+|---|---|
+| **Sonnet** | Standard. Det meste. |
+| **Opus** | Når det å ta feil er dyrt: arkitektur, datamodell, valg du må leve med |
+| **Haiku** | Kun ekte mekanisk arbeid |
+
+Lærdom fra sykkelkart fase 4: «liten oppgave» og «mekanisk oppgave» er ikke det
+samme. Norge/Italia-problemet så ut som en fargejustering, men var et designvalg.
+Haiku klarte det ikke.
+
+På Pro betaler du ikke per token. Ikke velg ned modell for å spare penger du
+ikke bruker.
+
+---
+
 ## Åpne spørsmål
 
 - [x] ~~Virker rå-URL-metoden?~~ Ja, verifisert med `OPPSTART.md`.
@@ -582,4 +627,4 @@ neste tråd den.
 **Del 3 — Claude-prosjekt**
 7. [ ] Opprett prosjekt `activity-data`
 8. [ ] Lim inn prosjektinstruksjoner (3.2 — ferdig utfylt, klar til bruk)
-9. [ ] Start tråd 1 og test filhenting som første handling
+9. [ ] Start tråd 1 (Opus) og test filhenting som første handling
