@@ -15,7 +15,6 @@ Parked items. Do not pursue mid-thread — write here and move on.
 - If the repo is renamed: update the raw URLs in the project instructions.
 
 ## Product (open from thread 1)
-- Mobile or web — decide in the platform thread.
 - A possible game-like feature — no concrete idea yet. Parked until the rest
   is clearer.
 
